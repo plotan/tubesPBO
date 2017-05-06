@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-04-25T01:35:37 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="90793807-3003-4166-bdfe-fc1705a5789e">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="eParking database"/>
+	<parameter name="periode1" class="java.sql.Timestamp"/>
+	<parameter name="periode2" class="java.sql.Timestamp"/>
+	<queryString>
+		<![CDATA[SELECT `eParking_ITERA`.parkir_kendaraan.tiket AS notik,
+     `eParking_ITERA`.parkir_kendaraan.nopol AS nopol,
+     `eParking_ITERA`.parkir_kendaraan.jenis AS jenis,
+     `eParking_ITERA`.parkir_kendaraan.waktu_masuk AS wktmsk,
+	 `eParking_ITERA`.parkir_kendaraan.waktu_keluar AS wktklr,
+	 `eParking_ITERA`.parkir_kendaraan.durasi AS durasi,
+	 `eParking_ITERA`.parkir_kendaraan.total_tarif AS tarif
+	 
+FROM
+     `eParking_ITERA`.parkir_kendaraan
+WHERE
+`eParking_ITERA`.parkir_kendaraan.jenis="Mobil" and waktu_keluar BETWEEN $P{periode1} and $P{periode2}]]>
+	</queryString>
+	<field name="notik" class="java.lang.Integer"/>
+	<field name="nopol" class="java.lang.String"/>
+	<field name="jenis" class="java.lang.String"/>
+	<field name="wktmsk" class="java.sql.Timestamp"/>
+	<field name="wktklr" class="java.sql.Timestamp"/>
+	<field name="durasi" class="java.lang.String"/>
+	<field name="tarif" class="java.lang.Double"/>
+	<variable name="Total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{tarif}]]></variableExpression>
+	</variable>
+	<group name="notik">
+		<groupExpression><![CDATA[$F{notik}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement x="208" y="0" width="441" height="30" uuid="a28111a3-28f4-4f68-85af-f2b975a86faa"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Parkir Mobil Periode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="73" width="104" height="20" uuid="1060fe62-288f-41df-937f-92a23e92b398"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periode akhir :]]></text>
+			</staticText>
+			<textField pattern="dd MMMM yyyy">
+				<reportElement x="359" y="73" width="155" height="20" uuid="ba061b08-3c65-428c-a075-2efb6929780f"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{periode2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="209" y="25" width="441" height="30" uuid="ea74161d-7412-47d8-8dc9-39455753338c"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[eParking ITERA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="54" width="104" height="20" uuid="aa042d6a-577a-4703-bfbe-24b1d3a637ef"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periode awal :]]></text>
+			</staticText>
+			<textField pattern="dd MMMM yyyy">
+				<reportElement x="359" y="55" width="155" height="20" uuid="44f1b6a9-736b-426e-959a-ba48de3a48b9"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{periode1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="48" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="802" height="46" uuid="514e8ce2-2451-4a81-8b5a-79653cb3bbe8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="376" y="0" width="114" height="20" uuid="a8ec287c-f786-4b60-bd70-fc2033f002fc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Waktu Keluar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="649" y="15" width="133" height="20" uuid="568a9f2e-9657-4096-98d3-d883779d4931"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Tarif (Rp.)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="505" y="0" width="1" height="47" uuid="a675cea2-a1f8-43af-9a3d-d63ff29042cf"/>
+			</line>
+			<line>
+				<reportElement x="100" y="0" width="1" height="48" uuid="ac751067-e943-4d5f-af30-f85ff0a1bf0f"/>
+			</line>
+			<staticText>
+				<reportElement x="243" y="0" width="111" height="20" uuid="5ee44d26-119c-4b34-8979-6fbcdf6578ba"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Waktu Masuk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="15" width="128" height="20" uuid="3d388fca-c76f-4eb7-8173-b638ade3a68b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Polisi]]></text>
+			</staticText>
+			<line>
+				<reportElement x="299" y="26" width="1" height="20" uuid="f62bfcdb-c84f-4da2-b044-c7923e8049f7"/>
+			</line>
+			<line>
+				<reportElement x="229" y="0" width="1" height="45" uuid="03e380e1-8944-4f27-a7a4-4c6bb80e52e3"/>
+			</line>
+			<line>
+				<reportElement x="630" y="0" width="1" height="47" uuid="a6080313-999f-4955-9c6f-216c754900c9"/>
+			</line>
+			<staticText>
+				<reportElement x="236" y="27" width="59" height="15" uuid="3458ba5e-4aa9-403c-9899-f020a93c65b1"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="27" width="51" height="14" uuid="bff0a3c6-6b47-448f-9e97-53df6af097d0"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="3" width="98" height="38" uuid="f55503ab-06c8-4583-a405-d2de6a6f65db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Tiket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="20" width="124" height="20" uuid="984e7536-8f9b-4008-b121-b65896cc0d45"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durasi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="28" width="71" height="15" uuid="89ba8528-7ed4-4fb6-af46-74a1ffcd80da"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="28" width="67" height="15" uuid="465d305c-0c5c-4a9d-8531-607e4479ee77"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jam]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<line>
+				<reportElement x="505" y="0" width="1" height="37" uuid="2616e60e-f72f-4399-8194-10384d1cf735"/>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="37" uuid="eea1c0ab-f3c7-43d7-a08e-bafa07bf3cb1"/>
+			</rectangle>
+			<line>
+				<reportElement x="100" y="0" width="1" height="37" uuid="47c71529-2367-486b-beaa-89374ef016a6"/>
+			</line>
+			<line>
+				<reportElement x="365" y="0" width="1" height="37" uuid="749029bd-8035-483e-b89f-736a8e233b4a"/>
+			</line>
+			<line>
+				<reportElement x="229" y="-3" width="1" height="40" uuid="4ed0ee72-ed80-4445-8c71-217516f01f7e"/>
+			</line>
+			<line>
+				<reportElement x="365" y="-46" width="1" height="45" uuid="c8583f58-24f9-4ce4-84b5-72e14400ed56"/>
+			</line>
+			<line>
+				<reportElement x="436" y="-23" width="1" height="23" uuid="fa4db4ce-e103-4061-bf46-96dab3eb9a93"/>
+			</line>
+			<line>
+				<reportElement x="299" y="-2" width="1" height="39" uuid="8b54fb92-00fc-4322-8486-9f23f383764c"/>
+			</line>
+			<line>
+				<reportElement x="436" y="-2" width="1" height="39" uuid="88986cef-99ef-42db-a75f-33f2ff2b037e"/>
+			</line>
+			<line>
+				<reportElement x="630" y="-2" width="1" height="39" uuid="7dbb7246-a621-4bb8-b8fc-2490bd539fae"/>
+			</line>
+			<textField pattern="">
+				<reportElement x="5" y="7" width="95" height="20" uuid="f8eec1b5-79b0-40e2-99be-ed13e673b1c3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{notik}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="7" width="128" height="19" uuid="691a666f-812d-471a-ac37-2f7dc2ff3c5c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nopol}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="233" y="6" width="64" height="30" uuid="69913937-da6f-46d6-9dcc-64f3ef1550a2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{wktmsk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="300" y="7" width="66" height="28" uuid="bb1d5f8e-3ea8-41d6-9f01-4faa65229abb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{wktmsk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="371" y="8" width="59" height="28" uuid="9a51a022-8771-42da-81e2-3bd939ccca8a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{wktklr}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="439" y="7" width="63" height="27" uuid="877a2a33-e1e9-4046-af77-268140a99111"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{wktklr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="514" y="8" width="107" height="26" uuid="da3ca8b5-4489-46ba-99a6-b12dba14c91c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{durasi}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" x="640" y="6" width="151" height="20" uuid="d7f7cc3b-660b-4cfc-83f2-6a7f42ecbcbb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[NumberFormat.getNumberInstance(Locale.GERMAN).format($F{tarif})]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="230" y="-23" width="275" height="1" uuid="5f39f664-29b4-45cd-8342-5e37b06313f4"/>
+				<line>
+					<reportElement isPrintRepeatedValues="false" x="0" y="0" width="275" height="1" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="d8af9f41-0163-4fbd-95be-f4c9524a7adb"/>
+				</line>
+			</frame>
+			<line>
+				<reportElement x="505" y="-1" width="1" height="37" uuid="8534fcd0-ebfe-48f9-9b6c-9d967f1f9361"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="9" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="374" y="9" width="255" height="24" uuid="43c5e29c-354f-47b5-a27d-d42f70431003"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Pemasukan: Rp. ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="632" y="9" width="133" height="22" uuid="1a0ca3cf-ba20-4fbf-9415-ceb551f912f2"/>
+				<textElement textAlignment="Left">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NumberFormat.getNumberInstance(Locale.GERMAN).format($V{Total})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
